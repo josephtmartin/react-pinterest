@@ -21,10 +21,8 @@ export default class MyNavbar extends Component {
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             </ul>
             <div className="form-inline my-2 my-lg-0">
-              {authed ? (
+              {authed && (
                 <button className="nav-link btn btn-danger" onClick={this.logMeOut}>Logout</button>
-              ) : (
-                ''
               )}
             </div>
           </div>
