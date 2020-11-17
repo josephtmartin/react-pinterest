@@ -2,6 +2,7 @@ import React from 'react';
 import { getBoardPins, getPin } from '../helpers/data/pinData';
 import { getSingleBoard } from '../helpers/data/boardData';
 import PinsCard from '../components/PinCard';
+import BoardForm from '../components/Forms/BoardForm';
 
 export default class SingleBoard extends React.Component {
   state = {
@@ -13,18 +14,21 @@ export default class SingleBoard extends React.Component {
     // 1. Pull boardId from URL params
     const boardId = this.props.match.params.id;
     // 2. Make a call to the API that gets the board info
-    getSingleBoard(boardId).then((response) => {
-      this.setState({
-        board: response,
-      });
-    });
-
+    this.getBoardInfo(boardId);
     // 3. Make a call to the API that returns the pins associated with this board and set to state.
     this.getPins(boardId)
       // because we did a promise.all, the response will not resolve until all the promises are completed
       .then((resp) => (
         this.setState({ pins: resp })
       ));
+  }
+
+  getBoardInfo = (boardId) => {
+    getSingleBoard(boardId).then((response) => {
+      this.setState({
+        board: response,
+      });
+    });
   }
 
   getPins = (boardId) => (
@@ -48,10 +52,10 @@ export default class SingleBoard extends React.Component {
         <PinsCard key={pin.firebaseKey} pin={pin} />
       ))
     );
-
     // 5. Render the pins on the DOM
     return (
       <div>
+        { Object.keys(board).length && <BoardForm board={board} onUpdate={this.getBoardInfo} />}
         <h1>{board.name}</h1>
         <div className='d-flex flex-wrap container'>
           {renderPins()}
