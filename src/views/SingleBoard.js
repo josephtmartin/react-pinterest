@@ -55,7 +55,7 @@ export default class SingleBoard extends React.Component {
     // 5. Render the pins on the DOM
     return (
       <div>
-        <BoardForm board={board} onUpdate={this.getBoardInfo}/>
+        { Object.keys(board).length && <BoardForm board={board} onUpdate={this.getBoardInfo} />}
         <h1>{board.name}</h1>
         <div className='d-flex flex-wrap container'>
           {renderPins()}
