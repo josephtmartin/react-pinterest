@@ -1,33 +1,56 @@
-import React, { Component } from 'react';
-import { getBoards } from '../helpers/data/boardData';
-import BoardsCard from '../components/BoardCard';
-import BoardsForm from '../components/Forms/BoardForm';
+import React from 'react';
+import { getAllUserBoards } from '../helpers/data/boardData';
+import BoardCard from '../components/BoardCard';
+import Loader from '../components/Loader';
+import getUid from '../helpers/data/authData';
+import BoardForm from '../components/Forms/BoardForm';
 
-export default class Boards extends Component {
+export default class Boards extends React.Component {
   state = {
     boards: [],
-  };
-
-  componentDidMount() {
-    this.getAllBoards();
+    loading: true,
   }
 
-  getAllBoards = () => {
-    getBoards().then((response) => this.setState({ boards: response }));
-  };
+  componentDidMount() {
+    this.getBoards();
+  }
+
+  getBoards = () => {
+    const currentUserId = getUid();
+    getAllUserBoards(currentUserId).then((response) => {
+      this.setState({
+        boards: response,
+      }, this.setLoading);
+    });
+  }
+
+  setLoading = () => {
+    this.timer = setInterval(() => {
+      this.setState({ loading: false });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
   render() {
-    const { boards } = this.state;
-    const renderBoardToDom = () => boards.map((board) => <BoardsCard key={board.firebaseKey} board={board} />);
-
+    const { boards, loading } = this.state;
+    const showBoards = () => (
+      boards.map((board) => <BoardCard key={board.firebaseKey} board={board} />)
+    );
     return (
-      <div className='board-container'>
-        <BoardsForm />
-        <h2>Here Are All Your Boards</h2>
-        <div className='d-flex flex-wrap container'>
-          {renderBoardToDom()}
-        </div>
-      </div>
+      <>
+        { loading ? (
+          <Loader />
+        ) : (
+          <>
+          <BoardForm onUpdate={this.getBoards}/>
+          <h2>Here are all of your boards</h2>
+          <div className='d-flex flex-wrap container'>{showBoards()}</div>
+          </>
+        )}
+      </>
     );
   }
 }
