@@ -20,7 +20,7 @@ const createBoard = (data) => axios.post(`${baseUrl}/boards.json`, data).then((r
     .catch((error) => console.warn(error));
 });
 
-const updateBoard = (firebaseKey, dataObject) => axios.patch(`${baseUrl}/boards/${firebaseKey}.json`, dataObject);
+const updateBoard = (dataObject) => axios.patch(`${baseUrl}/boards/${dataObject.firebaseKey}.json`, dataObject);
 
 export {
   getAllUserBoards,
