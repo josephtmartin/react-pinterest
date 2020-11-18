@@ -9,6 +9,7 @@ import PinForm from '../views/PinForm';
 import Pins from '../views/Pins';
 import SingleBoard from '../views/SingleBoard';
 import NotFound from '../views/NotFound';
+import SearchResults from '../views/SearchResults';
 
 export default function Routes({ user }) {
   return (
@@ -23,6 +24,11 @@ export default function Routes({ user }) {
         exact
         path='/boards/:id'
         component={(props) => <SingleBoard user={user} {...props} />}
+      />
+      <Route
+        exact
+        path='/search/:term/:type'
+        component={(props) => <SearchResults {...props} /> }
       />
       <Route component={NotFound} />
     </Switch>

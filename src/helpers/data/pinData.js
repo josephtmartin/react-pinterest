@@ -14,4 +14,23 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export { getBoardPins, getPin };
+const getAllPins = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json`).then((response) => {
+    resolve(Object.values(response.data));
+  }).catch((error) => reject(error));
+});
+
+const searchPins = (uid, term) => new Promise((resolve, reject) => {
+  getAllPins().then((response) => {
+    const filteredArray = response.filter((resp) => resp.userId === uid || resp.private === false);
+    const searchResults = filteredArray.filter((resp) => resp.name.toLowerCase().includes(term) || resp.description.toLowerCase().includes(term));
+    resolve(searchResults);
+  }).catch((error) => reject(error));
+});
+
+export {
+  getBoardPins,
+  getPin,
+  getAllPins,
+  searchPins,
+};

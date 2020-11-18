@@ -22,9 +22,17 @@ const createBoard = (data) => axios.post(`${baseUrl}/boards.json`, data).then((r
 
 const updateBoard = (dataObject) => axios.patch(`${baseUrl}/boards/${dataObject.firebaseKey}.json`, dataObject);
 
+const searchBoards = (uid, term) => new Promise((resolve, reject) => {
+  getAllUserBoards(uid).then((response) => {
+    const searchResults = response.filter((resp) => resp.name.toLowerCase().includes(term) || resp.description.toLowerCase().includes(term));
+    resolve(searchResults);
+  }).catch((error) => reject(error));
+});
+
 export {
   getAllUserBoards,
   getSingleBoard,
   createBoard,
   updateBoard,
+  searchBoards,
 };
