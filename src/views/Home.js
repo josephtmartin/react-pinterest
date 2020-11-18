@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Auth from '../components/Auth';
 import Loader from '../components/Loader';
 import { getAllPins } from '../helpers/data/pinData';
-import getUid from '../helpers/data/authData';
 import PinsCard from '../components/PinCard';
 
 export default class Home extends Component {
@@ -16,8 +15,7 @@ export default class Home extends Component {
   }
 
   getPins = () => {
-    const userId = getUid();
-    getAllPins(userId)
+    getAllPins()
       .then((pins) => {
         this.setState({
           pins,
