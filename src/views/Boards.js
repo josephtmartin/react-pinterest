@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { getAllUserBoards } from '../helpers/data/boardData';
 import BoardCard from '../components/BoardCard';
 import Loader from '../components/Loader';
@@ -6,7 +6,7 @@ import getUid from '../helpers/data/authData';
 import BoardForm from '../components/Forms/BoardForm';
 import AppModal from '../components/AppModal';
 
-export default class Boards extends React.Component {
+export default class Boards extends Component {
   state = {
     boards: [],
     loading: true,
