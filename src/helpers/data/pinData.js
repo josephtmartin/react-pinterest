@@ -16,7 +16,8 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
 
 const getAllPins = () => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins.json`).then((response) => {
-    resolve(Object.values(response.data));
+    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === false);
+    resolve(nonPrivateArray);
   }).catch((error) => reject(error));
 });
 
