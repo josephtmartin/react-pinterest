@@ -2,6 +2,12 @@ import axios from 'axios';
 
 const baseUrl = 'https://fir-pinterest.firebaseio.com/';
 
+const getUserPins = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json?orderBy="userId"&equalTo="${userId}"`).then((response) => {
+    resolve(Object.values(response.data));
+  }).catch((error) => reject(error));
+});
+
 const getBoardPins = (boardId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins-boards.json?orderBy="boardId"&equalTo="${boardId}"`).then((response) => {
     resolve(Object.values(response.data));
@@ -14,9 +20,9 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const getAllPins = () => new Promise((resolve, reject) => {
+const getAllPins = (userId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins.json`).then((response) => {
-    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === false);
+    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === false || resp.userId === userId);
     resolve(nonPrivateArray);
   }).catch((error) => reject(error));
 });
@@ -34,4 +40,5 @@ export {
   getPin,
   getAllPins,
   searchPins,
+  getUserPins,
 };

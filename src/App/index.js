@@ -37,7 +37,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <MyNavbar user={user} />
-          <Routes user={ user }/>
+          <Routes user={user} />
         </Router>
       </div>
     );
