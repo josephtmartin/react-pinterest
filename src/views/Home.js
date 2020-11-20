@@ -3,6 +3,7 @@ import Auth from '../components/Auth';
 import Loader from '../components/Loader';
 import { getAllPins } from '../helpers/data/pinData';
 import PinsCard from '../components/PinCard';
+import getUid from '../helpers/data/authData';
 
 export default class Home extends Component {
   state = {
@@ -15,7 +16,8 @@ export default class Home extends Component {
   }
 
   getPins = () => {
-    getAllPins()
+    const userId = getUid();
+    getAllPins(userId)
       .then((pins) => {
         this.setState({
           pins,
@@ -26,6 +28,7 @@ export default class Home extends Component {
 
   loadComponent = () => {
     const user = this.props;
+    console.warn(user);
     let component = '';
     if (user === null) {
       component = <Loader />;
