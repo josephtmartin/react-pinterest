@@ -29,10 +29,13 @@ const searchBoards = (uid, term) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const deleteBoard = (boardId) => axios.delete(`${baseUrl}/boards/${boardId}.json`);
+
 export {
   getAllUserBoards,
   getSingleBoard,
   createBoard,
   updateBoard,
   searchBoards,
+  deleteBoard,
 };
