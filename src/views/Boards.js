@@ -36,7 +36,6 @@ export default class Boards extends Component {
   }
 
   removeBoard = (e) => {
-    console.warn('removed Board ID', e.target.id);
     const removedBoard = this.state.boards.filter((board) => board.firebaseKey !== e.target.id);
 
     this.setState({

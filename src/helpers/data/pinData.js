@@ -35,10 +35,17 @@ const searchPins = (uid, term) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const createPin = (data) => axios.post(`${baseUrl}/pins.json`, data).then((response) => {
+  const update = { firebaseKey: response.data.name };
+  axios.patch(`${baseUrl}/pins/${response.data.name}.json`, update)
+    .catch((error) => console.warn(error));
+});
+
 export {
   getBoardPins,
   getPin,
   getAllPins,
   searchPins,
   getUserPins,
+  createPin,
 };
