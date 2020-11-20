@@ -27,8 +27,7 @@ export default class Home extends Component {
   }
 
   loadComponent = () => {
-    const user = this.props;
-    console.warn(user);
+    const { user } = this.props;
     let component = '';
     if (user === null) {
       component = <Loader />;

@@ -20,9 +20,9 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const getAllPins = () => new Promise((resolve, reject) => {
+const getAllPins = (userId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins.json`).then((response) => {
-    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === false);
+    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === false || resp.userId === userId);
     resolve(nonPrivateArray);
   }).catch((error) => reject(error));
 });
