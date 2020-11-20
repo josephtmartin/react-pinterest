@@ -96,6 +96,7 @@ export default class PinForm extends Component {
           />
           <button>Submit</button>
       </form>
+      // add a dropdown for private
     );
   }
 }
