@@ -6,8 +6,9 @@ import fbConnection from '../helpers/data/connection';
 import MyNavbar from '../components/MyNavbar';
 import Routes from '../helpers/Routes';
 
-// import { patchBoards, patchPins } from '../helpers/data/patchFBkeys';
+// import { patchBoards, patchPins, patchPinsBoards } from '../helpers/data/patchFBkeys';
 
+// patchPinsBoards();
 // patchBoards();
 // patchPins();
 fbConnection();
