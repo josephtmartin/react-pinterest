@@ -20,4 +20,13 @@
 //   }).catch((error) => reject(error));
 // });
 
-// export { patchBoards, patchPins };
+// const patchPinsBoards = () => new Promise((resolve, reject) => {
+//   axios.get(`${baseUrl}/pins-boards.json`).then((response) => {
+//     const keys = Object.keys(response.data);
+//     keys.forEach((key) => {
+//       axios.patch(`${baseUrl}/pins-boards/${key}.json`, { firebaseKey: key });
+//     });
+//   }).catch((error) => reject(error));
+// });
+
+// export { patchBoards, patchPins, patchPinsBoards };

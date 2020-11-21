@@ -22,18 +22,28 @@ const getPin = (pinId) => new Promise((resolve, reject) => {
 
 const getAllPins = (userId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins.json`).then((response) => {
-    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === false || resp.userId === userId);
+    const nonPrivateArray = Object.values(response.data).filter((resp) => resp.private === 'Public' || resp.userId === userId);
     resolve(nonPrivateArray);
   }).catch((error) => reject(error));
 });
 
 const searchPins = (uid, term) => new Promise((resolve, reject) => {
   getAllPins().then((response) => {
-    const filteredArray = response.filter((resp) => resp.userId === uid || resp.private === false);
+    const filteredArray = response.filter((resp) => resp.userId === uid || resp.private === 'Public');
     const searchResults = filteredArray.filter((resp) => resp.name.toLowerCase().includes(term) || resp.description.toLowerCase().includes(term));
     resolve(searchResults);
   }).catch((error) => reject(error));
 });
+
+const createPin = (data) => axios.post(`${baseUrl}/pins.json`, data).then((response) => {
+  const update = { firebaseKey: response.data.name };
+  axios.patch(`${baseUrl}/pins/${response.data.name}.json`, update)
+    .catch((error) => console.warn(error));
+});
+
+const updatePin = (dataObject) => axios.patch(`${baseUrl}/pins/${dataObject.firebaseKey}.json`, dataObject);
+
+const deletePin = (pinId) => axios.delete(`${baseUrl}/pins/${pinId}.json`);
 
 export {
   getBoardPins,
@@ -41,4 +51,7 @@ export {
   getAllPins,
   searchPins,
   getUserPins,
+  createPin,
+  updatePin,
+  deletePin,
 };
