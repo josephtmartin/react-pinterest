@@ -97,7 +97,14 @@ export default class PinForm extends Component {
         />
         <div className='form-group'>
           <label for='private'>Private or Public</label>
-          <select className='form-control' id='private' name='private' value={this.state.private} onChange={this.handleChange}>
+          <select
+            className='form-control'
+            id='private'
+            name='private'
+            value={this.state.private}
+            onChange={this.handleChange}
+            require
+          >
             <option>Private</option>
             <option>Public</option>
           </select>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PinForm from '../components/Forms/PinForm';
 import AppModal from '../components/AppModal';
 import { getPin } from '../helpers/data/pinData';
+import FormDropdown from '../components/FormDropdown';
 
 export default class PinDetails extends Component {
   state = {
@@ -38,6 +39,7 @@ export default class PinDetails extends Component {
               <p className='card-text'>
                 {pin.description}
               </p>
+              <FormDropdown pin={pin.firebaseKey}/>
             </div>
         </div>
         </div>

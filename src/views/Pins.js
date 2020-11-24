@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import getUid from '../helpers/data/authData';
-import { getUserPins, deletePin } from '../helpers/data/pinData';
+import { getUserPins, deletePin, deleteBoardPin } from '../helpers/data/pinData';
 import PinCard from '../components/PinCard';
 import AppModal from '../components/AppModal';
 import PinForm from '../components/Forms/PinForm';
@@ -24,6 +24,7 @@ export default class Pins extends Component {
       .then(() => {
         this.getPins();
       });
+    deleteBoardPin(e.target.id);
   }
 
   render() {
