@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { getBoardPins, getPin } from '../helpers/data/pinData';
+import {
+  getBoardPins,
+  getPin,
+  deletePin,
+  deleteBoardPin,
+} from '../helpers/data/pinData';
 import { getSingleBoard } from '../helpers/data/boardData';
 import PinsCard from '../components/PinCard';
 import BoardForm from '../components/Forms/BoardForm';
@@ -45,12 +50,25 @@ export default class SingleBoard extends Component {
     })
   )
 
+  removePin = (e) => {
+    const notRemovedPins = this.state.pins.filter(
+      (pin) => pin.firebaseKey !== e.target.id,
+    );
+    this.setState({
+      pins: notRemovedPins,
+    });
+    deletePin(e.target.id).then(() => {
+      this.getPins();
+    });
+    deleteBoardPin(e.target.id);
+  };
+
   render() {
     const { pins, board } = this.state;
     const renderPins = () => (
       // 4. map over the pins in state
       pins.map((pin) => (
-        <PinsCard key={pin.firebaseKey} pin={pin} />
+        <PinsCard key={pin.firebaseKey} pin={pin} removePin={this.removePin} />
       ))
     );
     // 5. Render the pins on the DOM

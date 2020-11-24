@@ -45,6 +45,26 @@ const updatePin = (dataObject) => axios.patch(`${baseUrl}/pins/${dataObject.fire
 
 const deletePin = (pinId) => axios.delete(`${baseUrl}/pins/${pinId}.json`);
 
+// creating the join table
+const createBoardPin = (boardId, pinId, userId) => {
+  axios.post(`${baseUrl}/pins-boards.json`, {
+    boardId,
+    pinId,
+    userId,
+  }).catch((error) => console.warn(error));
+};
+
+// when deleting a pin it removes the join table associated with the pin
+const deleteBoardPin = (pinId) => {
+  axios.get(`${baseUrl}/pins-boards.json?orderBy="pinId"&equalTo="${pinId}"`)
+    .then((response) => {
+      const toBeDeleted = Object.keys(response.data);
+      toBeDeleted.forEach((join) => {
+        axios.delete(`${baseUrl}/pins-boards/${join}.json`);
+      });
+    });
+};
+
 export {
   getBoardPins,
   getPin,
@@ -54,4 +74,6 @@ export {
   createPin,
   updatePin,
   deletePin,
+  createBoardPin,
+  deleteBoardPin,
 };
