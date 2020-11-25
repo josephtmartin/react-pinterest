@@ -27,10 +27,12 @@ export default class PinDetails extends Component {
 
     return (
       <>
+      <div className='d-flex justify-content-center'>
         <AppModal title={'Update Pin'} buttonLabel={'Update Pin'}>
           { Object.keys(pin).length && <PinForm pin={pin} onUpdate={this.getPinInfo} />}
         </AppModal>
-        <h1>{pin.name}</h1>
+      </div>
+        <h1 className='d-flex justify-content-center mt-3'>{pin.name}</h1>
         <div className='d-flex flex-wrap container'>
           <div className='card m-2'>
             <img className='card-img-top' src={pin.imageUrl} alt='Pin Img' />

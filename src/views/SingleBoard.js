@@ -74,10 +74,12 @@ export default class SingleBoard extends Component {
     // 5. Render the pins on the DOM
     return (
       <div>
-        <AppModal title={'Update Board'} buttonLabel={'Update Board'}>
-          { Object.keys(board).length && <BoardForm board={board} onUpdate={this.getBoardInfo} />}
-        </AppModal>
-        <h1>{board.name}</h1>
+        <div className='d-flex justify-content-center'>
+          <AppModal title={'Update Board'} buttonLabel={'Update Board'}>
+            { Object.keys(board).length && <BoardForm board={board} onUpdate={this.getBoardInfo} />}
+          </AppModal>
+        </div>
+        <h1 className='d-flex justify-content-center'>{board.name}</h1>
         <div className='d-flex flex-wrap container'>
           {renderPins()}
         </div>

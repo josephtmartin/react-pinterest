@@ -58,13 +58,15 @@ export default class Boards extends Component {
         { loading ? (
           <Loader />
         ) : (
-          <>
-          <AppModal title={'Create Board'} buttonLabel={'Create Board'}>
-            <BoardForm onUpdate={this.getBoards}/>
-          </AppModal>
-          <h2>Here are all of your boards</h2>
+          <div>
+            <div className='d-flex justify-content-center'>
+            <AppModal title={'Create Board'} buttonLabel={'Create Board'}>
+              <BoardForm onUpdate={this.getBoards}/>
+            </AppModal>
+            </div>
+          <h1 className='d-flex justify-content-center'>Here are all of your boards</h1>
           <div className='d-flex flex-wrap container'>{showBoards()}</div>
-          </>
+          </div>
         )}
       </>
     );

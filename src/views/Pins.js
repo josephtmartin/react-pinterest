@@ -37,10 +37,12 @@ export default class Pins extends Component {
     );
     return (
       <div>
-        <AppModal title={'Create Pin'} buttonLabel={'Create Pin'}>
-          <PinForm onUpdate={this.getPins} />
-        </AppModal>
-        <h1 className='mt-5'>My Pins</h1>
+        <div className='d-flex justify-content-center'>
+          <AppModal title={'Create Pin'} buttonLabel={'Create Pin'}>
+            <PinForm onUpdate={this.getPins} />
+          </AppModal>
+        </div>
+        <h1 className='d-flex justify-content-center mt-3'>My Pins</h1>
         <div className='d-flex flex-wrap container justify-content-center'>
           {renderPinsToDom()}
         </div>
