@@ -10,10 +10,12 @@ export default function PinsCard({ pin, removePin }) {
         <p className='card-text'>
           {pin.description}
         </p>
-        <Link className='btn btn-primary' to={`/pin-edit/${pin.firebaseKey}`}>
-          Edit Pin
-        </Link>
-        <button className='btn btn-danger' id={pin.firebaseKey} onClick={(e) => removePin(e)}> Delete Pin</button>
+        <div className='button-container-pin d-flex justify-content-center'>
+          <Link className='btn btn-primary m-2' to={`/pin-edit/${pin.firebaseKey}`}>
+            Edit Pin
+          </Link>
+          <button className='btn btn-danger m-2' id={pin.firebaseKey} onClick={(e) => removePin(e)}> Delete Pin</button>
+        </div>
       </div>
     </div>
   );

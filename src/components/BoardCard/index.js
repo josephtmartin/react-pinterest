@@ -10,10 +10,12 @@ export default function BoardsCard({ board, removeBoard }) {
             <p className='card-text'>
               {board.description}
             </p>
-            <Link className='btn btn-primary' to={`/boards/${board.firebaseKey}`}>
-              View Pins
-            </Link>
-            <button className='btn btn-danger' id={board.firebaseKey} onClick={(e) => removeBoard(e)}> Delete Board</button>
+            <div className='button-container-board d-flex justify-content-center'>
+              <Link className='btn btn-primary m-2' to={`/boards/${board.firebaseKey}`}>
+                View Pins
+              </Link>
+              <button className='btn btn-danger m-2' id={board.firebaseKey} onClick={(e) => removeBoard(e)}> Delete Board</button>
+            </div>
           </div>
         </div>
   );

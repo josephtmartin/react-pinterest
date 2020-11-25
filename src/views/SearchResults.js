@@ -56,7 +56,7 @@ export default class SearchResults extends Component {
 
     return (
       <div>
-        <h2>Search Results</h2>
+        <h1 className='d-flex justify-content-center'>Search Results</h1>
         <div className='d-flex flex-wrap justify-content-center container'>
           {showResults()}
         </div>
